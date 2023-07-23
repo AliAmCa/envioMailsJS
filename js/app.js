@@ -39,6 +39,16 @@ document.addEventListener('DOMContentLoaded', function(){
             spinner.classList.remove('flex');
             spinner.classList.add('hidden');
             reiniciarObjeto();
+
+            // Crear alerta
+            const alertaExito = document.createElement('P');
+            alertaExito.classList.add('bg-green-500', 'text-white','text-center', 'p-2', 'rounded-lg', 'mt-10',
+            'font-bold', 'text-sm', 'uppercase');
+            alertaExito.textContent = 'Mensaje enviado correctamente';
+            formulario.appendChild(alertaExito);
+            setTimeout(()=>{
+                alertaExito.remove();
+            },3000);
     
         },3000);
     }
@@ -63,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
         // Asignar valores
         email[e.target.name] = e.target.value.trim().toLowerCase();
-        console.log(email);
+        //console.log(email);
 
         //Comprobar el objeto email
         comprobarEmail();
@@ -96,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
     function comprobarEmail(){
-        console.log(Object.values(email));
+        //console.log(Object.values(email));
         // varifica si alguno de los elementos del arreglo incluye un string vacio
         if(Object.values(email).includes('')){
             btnSubmit.classList.add('opacity-50');
@@ -112,6 +122,7 @@ document.addEventListener('DOMContentLoaded', function(){
         email.asunto = '';
         email.mensaje = '';
         formulario.reset();
+        
         comprobarEmail();
     }
 });
