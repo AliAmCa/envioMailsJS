@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function(){
     const formulario = document.querySelector('#formulario');
     const btnSubmit = document.querySelector('#formulario button[type="submit"]');
     const btnReset = document.querySelector('#formulario button[type="reset"]');
+    const spinner = document.querySelector('#spinner');
+
     //console.log(inputEmail);
     //console.log(inputMensaje);
 
@@ -24,13 +26,24 @@ document.addEventListener('DOMContentLoaded', function(){
     btnReset.addEventListener('click', function(e){
         e.preventDefault();
         //reiniciar el objeto
-        email.email = '';
-        email.asunto = '';
-        email.mensaje = '';
-        formulario.reset();
-        comprobarEmail();
-    })
+        reiniciarObjeto();
+    });
+    formulario.addEventListener('submit', enviarEmail);
     
+    function enviarEmail(e){
+        e.preventDefault();
+        spinner.classList.add('flex');
+        spinner.classList.remove('hidden');
+
+        setTimeout(()=>{
+            spinner.classList.remove('flex');
+            spinner.classList.add('hidden');
+            reiniciarObjeto();
+    
+        },3000);
+    }
+
+
     // validar 
     function validar(e){
         if(e.target.value.trim() === ""){
@@ -90,7 +103,15 @@ document.addEventListener('DOMContentLoaded', function(){
             btnSubmit.disable = true;
         }else{
             btnSubmit.classList.remove('opacity-50');
-            btnSubmit.disable = false;
+            btnSubmit.disabled = false;
         }
+    }
+
+    function reiniciarObjeto(){
+        email.email = '';
+        email.asunto = '';
+        email.mensaje = '';
+        formulario.reset();
+        comprobarEmail();
     }
 });
